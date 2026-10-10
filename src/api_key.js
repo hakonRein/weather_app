@@ -1,1 +1,0 @@
-export default '5EHPFLTEPRELQLUFYR53MMYTH';

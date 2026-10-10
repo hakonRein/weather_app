@@ -1,10 +1,17 @@
 import "./style.css";
-import API_KEY from './api_key.js';
+import weatherAPI from './weatherAPI.js';
 
-const baseURL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'
+const searchBtn = document.getElementById('search-btn');
+const searchField = document.getElementById('search');
+
+searchBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    getWeatherData(searchField.value);
+    searchField.value = "";
+})
 
 async function getWeatherData(location) {
-    const url = `${baseURL}${location}?key=${API_KEY}&unitGroup=metric&include=days`;
+    const url = `${weatherAPI.baseUrl}${location}?key=${weatherAPI.apiKey}&unitGroup=metric&include=days`;
     const response = await fetch(url);
     const json = await response.json();
     parseWeatherData(json);
@@ -25,7 +32,5 @@ function getWeatherObject(weather) {
         conditions: weather.conditions,
     };
 }
-
-getWeatherData('Oslo');
 
 
